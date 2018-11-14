@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails d'un contact - AddressBook{% endblock %}
+
+{% block body %}
+    <h2>Détails d'un contact</h2>
+
+    <p>Prénom : {{ contact.prenom }}</p>
+    <p>Nom : {{ contact.nom }}</p>
+
+    {% if contact.email %}
+    <p>Email : {{ contact.email }}</p>
+    {% endif %}
+
+    {% if contact.telephone %}
+    <p>Téléphone : {{ contact.telephone }}</p>
+    {% endif %}
+
+
+{% endblock %}
