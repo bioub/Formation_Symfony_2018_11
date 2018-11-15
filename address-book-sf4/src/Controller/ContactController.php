@@ -6,18 +6,32 @@ use App\Entity\Contact;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/contacts")
+ */
 class ContactController extends AbstractController
 {
     /**
-     * @Route("/contacts")
+     * @Route("")
      */
     public function index()
     {
-        return $this->render('contact/index.html.twig');
+        $repo = $this->getDoctrine()->getRepository(Contact::class);
+        $contacts = $repo->findAll();
+        /*
+        $contacts = [
+            (new Contact())->setId(123)->setPrenom('Steve')->setNom('Jobs'),
+            (new Contact())->setId(456)->setPrenom('Bill')->setNom('Gates'),
+        ];
+        */
+
+        return $this->render('contact/index.html.twig', [
+            'contacts' => $contacts,
+        ]);
     }
 
     /**
-     * @Route("/contacts/add")
+     * @Route("/add")
      */
     public function add()
     {
@@ -25,23 +39,27 @@ class ContactController extends AbstractController
     }
 
     /**
-     * @Route("/contacts/{id}", requirements={"id": "[1-9][0-9]*"})
+     * @Route("/{id}", requirements={"id": "[1-9][0-9]*"})
      */
     public function show($id)
     {
+        /*
         $steve = new Contact();
         $steve->setId(987)
             ->setPrenom('Steve')
             ->setNom('Jobs')
             ->setEmail('sjob@apple.com');
+        */
+        $repo = $this->getDoctrine()->getRepository(Contact::class);
+        $contact = $repo->find($id);
 
         return $this->render('contact/show.html.twig', [
-            'contact' => $steve,
+            'contact' => $contact,
         ]);
     }
 
     /**
-     * @Route("/contacts/{id}/delete")
+     * @Route("/{id}/delete", requirements={"id": "[1-9][0-9]*"})
      */
     public function delete($id)
     {
@@ -49,7 +67,7 @@ class ContactController extends AbstractController
     }
 
     /**
-     * @Route("/contacts/{id}/update")
+     * @Route("/{id}/update", requirements={"id": "[1-9][0-9]*"})
      */
     public function update()
     {

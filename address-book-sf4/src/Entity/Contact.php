@@ -2,104 +2,90 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\ContactRepository")
+ */
 class Contact
 {
-    protected $id;
-    protected $prenom;
-    protected $nom;
-    protected $email;
-    protected $telephone;
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
 
     /**
-     * @return mixed
+     * @ORM\Column(type="string", length=40)
      */
-    public function getId()
+    private $prenom;
+
+    /**
+     * @ORM\Column(type="string", length=40)
+     */
+    private $nom;
+
+    /**
+     * @ORM\Column(type="string", length=80, nullable=true)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    private $telephone;
+
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @param mixed $id
-     * @return Contact
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPrenom()
+    public function getPrenom(): ?string
     {
         return $this->prenom;
     }
 
-    /**
-     * @param mixed $prenom
-     * @return Contact
-     */
-    public function setPrenom($prenom)
+    public function setPrenom(string $prenom): self
     {
         $this->prenom = $prenom;
+
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getNom()
+    public function getNom(): ?string
     {
         return $this->nom;
     }
 
-    /**
-     * @param mixed $nom
-     * @return Contact
-     */
-    public function setNom($nom)
+    public function setNom(string $nom): self
     {
         $this->nom = $nom;
+
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    /**
-     * @param mixed $email
-     * @return Contact
-     */
-    public function setEmail($email)
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
+
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getTelephone()
+    public function getTelephone(): ?string
     {
         return $this->telephone;
     }
 
-    /**
-     * @param mixed $telephone
-     * @return Contact
-     */
-    public function setTelephone($telephone)
+    public function setTelephone(?string $telephone): self
     {
         $this->telephone = $telephone;
+
         return $this;
     }
-
-
 }

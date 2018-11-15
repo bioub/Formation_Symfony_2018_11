@@ -12,14 +12,20 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Jean Dupont</td>
-                <td>
-                    <a class="btn btn-sm btn-primary" href="{{ path('app_contact_show', {id: 123}) }}">Afficher</a>
-                    <a class="btn btn-sm btn-warning" href="{{ path('app_contact_update', {id: 123}) }}">Modifier</a>
-                    <a class="btn btn-sm btn-danger" href="{{ path('app_contact_delete', {id: 123}) }}">Supprimer</a>
-                </td>
-            </tr>
+            {% for contact in contacts %}
+                <tr>
+                    <td>{{ contact.prenom }} {{ contact.nom }}</td>
+                    <td>
+                        <a class="btn btn-sm btn-primary" href="{{ path('app_contact_show', {id: contact.id}) }}">Afficher</a>
+                        <a class="btn btn-sm btn-warning" href="{{ path('app_contact_update', {id: contact.id}) }}">Modifier</a>
+                        <a class="btn btn-sm btn-danger" href="{{ path('app_contact_update', {id: contact.id}) }}">Supprimer</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="2">Pas de contact</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 {% endblock %}
