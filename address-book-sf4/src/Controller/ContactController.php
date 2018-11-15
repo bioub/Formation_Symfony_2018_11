@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Contact;
+use App\Manager\ContactManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -11,19 +13,24 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ContactController extends AbstractController
 {
+    /** @var ContactManager */
+    protected $contactManager;
+
+    /**
+     * ContactController constructor.
+     * @param ContactManager $contactManager
+     */
+    public function __construct(ContactManager $contactManager)
+    {
+        $this->contactManager = $contactManager;
+    }
+
     /**
      * @Route("")
      */
     public function index()
     {
-        $repo = $this->getDoctrine()->getRepository(Contact::class);
-        $contacts = $repo->findAll();
-        /*
-        $contacts = [
-            (new Contact())->setId(123)->setPrenom('Steve')->setNom('Jobs'),
-            (new Contact())->setId(456)->setPrenom('Bill')->setNom('Gates'),
-        ];
-        */
+        $contacts = $this->contactManager->getAll();
 
         return $this->render('contact/index.html.twig', [
             'contacts' => $contacts,
@@ -33,8 +40,10 @@ class ContactController extends AbstractController
     /**
      * @Route("/add")
      */
-    public function add()
+    public function add(Request $request)
     {
+        // $request->getSession()->
+
         return $this->render('contact/add.html.twig');
     }
 
@@ -43,15 +52,7 @@ class ContactController extends AbstractController
      */
     public function show($id)
     {
-        /*
-        $steve = new Contact();
-        $steve->setId(987)
-            ->setPrenom('Steve')
-            ->setNom('Jobs')
-            ->setEmail('sjob@apple.com');
-        */
-        $repo = $this->getDoctrine()->getRepository(Contact::class);
-        $contact = $repo->find($id);
+        $contact = $this->contactManager->getById($id);
 
         return $this->render('contact/show.html.twig', [
             'contact' => $contact,

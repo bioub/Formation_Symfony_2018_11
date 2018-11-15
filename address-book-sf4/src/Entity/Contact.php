@@ -36,6 +36,15 @@ class Contact
      */
     private $telephone;
 
+    /** @ORM\Column(name="date_naissance", type="date", nullable=true) */
+    private $dateNaissance;
+
+    /**
+     * @var Societe
+     * @ORM\ManyToOne(targetEntity="App\Entity\Societe", inversedBy="contacts")
+     */
+    protected $societe;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -88,4 +97,35 @@ class Contact
 
         return $this;
     }
+
+    public function getDateNaissance(): ?\DateTime
+    {
+        return $this->dateNaissance;
+    }
+
+    public function setDateNaissance(?\DateTime $dateNaissance): self
+    {
+        $this->dateNaissance = $dateNaissance;
+        return $this;
+    }
+
+    /**
+     * @return Societe
+     */
+    public function getSociete(): ?Societe
+    {
+        return $this->societe;
+    }
+
+    /**
+     * @param Societe $societe
+     * @return Contact
+     */
+    public function setSociete(?Societe $societe): self
+    {
+        $this->societe = $societe;
+        return $this;
+    }
+
+
 }

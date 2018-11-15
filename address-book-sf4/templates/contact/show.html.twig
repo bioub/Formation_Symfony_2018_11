@@ -16,5 +16,9 @@
     <p>Téléphone : {{ contact.telephone }}</p>
     {% endif %}
 
+    {% if contact.societe %}
+        <p>Societe : {{ contact.societe.nom }}</p>
+    {% endif %}
+
 
 {% endblock %}
