@@ -20,11 +20,9 @@
         </nav>
         <div class="container-fluid">
 
-            {% for message in app.request.session.flashBag.get('success') %}
-            <div class="alert alert-success">
-                {{ message }}
-            </div>
-            {% endfor %}
+            {#{% include '_flashalert.html.twig' %}#}
+
+            {{ flashAlert('success') }}
 
             {% block body %}{% endblock %}
             <hr>
