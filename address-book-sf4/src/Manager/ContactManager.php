@@ -37,4 +37,11 @@ class ContactManager
         $repo = $this->doctrine->getRepository(Contact::class);
         return $repo->findWithSociete($id);
     }
+
+    public function remove($contact)
+    {
+        $em = $this->doctrine->getManager();
+        $em->remove($contact);
+        $em->flush();
+    }
 }

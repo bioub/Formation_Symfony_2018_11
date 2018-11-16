@@ -14,30 +14,30 @@ class Contact
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", length=40)
      */
-    private $prenom;
+    protected $prenom;
 
     /**
      * @ORM\Column(type="string", length=40)
      */
-    private $nom;
+    protected $nom;
 
     /**
      * @ORM\Column(type="string", length=80, nullable=true)
      */
-    private $email;
+    protected $email;
 
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
      */
-    private $telephone;
+    protected $telephone;
 
     /** @ORM\Column(name="date_naissance", type="date", nullable=true) */
-    private $dateNaissance;
+    protected $dateNaissance;
 
     /**
      * @var Societe

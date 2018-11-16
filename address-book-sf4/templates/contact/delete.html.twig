@@ -3,5 +3,13 @@
 {% block title %}Supprimer un contact - AddressBook{% endblock %}
 
 {% block body %}
-<h2>Supprimer un contact</h2>
+    <h2>Supprimer un contact</h2>
+    <form method="post">
+        <input type="hidden" name="_method" value="DELETE">
+        <p>Voulez vous supprimer {{ contact.prenom }} {{ contact.nom }} ?</p>
+        <p>
+            <button name="confirm" value="oui">Oui</button>
+            <button name="confirm" value="non">Non</button>
+        </p>
+    </form>
 {% endblock %}

@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Contact;
 use App\Manager\ContactManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -62,9 +61,24 @@ class ContactController extends AbstractController
     /**
      * @Route("/{id}/delete", requirements={"id": "[1-9][0-9]*"})
      */
-    public function delete($id)
+    public function delete($id, Request $request)
     {
-        return $this->render('contact/delete.html.twig');
+        $contact = $this->contactManager->getById($id);
+
+        if ($request->isMethod('DELETE')) {
+            if ($request->get('confirm') === 'oui') {
+                $this->contactManager->remove($contact);
+                $this->addFlash(
+                    'success',
+                    "Le contact {$contact->getPrenom()} a bien été supprimé"
+                );
+            }
+            return $this->redirectToRoute('app_contact_index');
+        }
+
+        return $this->render('contact/delete.html.twig', [
+            'contact' => $contact,
+        ]);
     }
 
     /**
