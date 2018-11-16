@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\ContactType;
 use App\Manager\ContactManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,9 +42,11 @@ class ContactController extends AbstractController
      */
     public function add(Request $request)
     {
-        // $request->getSession()->
+        $form = $this->createForm(ContactType::class);
 
-        return $this->render('contact/add.html.twig');
+        return $this->render('contact/add.html.twig', [
+            'contactForm' => $form->createView(),
+        ]);
     }
 
     /**

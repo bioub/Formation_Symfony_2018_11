@@ -1,7 +1,12 @@
 {% extends 'base.html.twig' %}
+{% form_theme contactForm 'bootstrap_4_layout.html.twig' %}
 
 {% block title %}Ajouter un contact - AddressBook{% endblock %}
 
 {% block body %}
-<h2>Ajouter un contact</h2>
+    <h2>Ajouter un contact</h2>
+    {{ form_start(contactForm) }}
+        {{ form_widget(contactForm) }}
+        <button class="btn btn-primary">Ajouter</button>
+    {{ form_end(contactForm) }}
 {% endblock %}
